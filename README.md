@@ -32,7 +32,9 @@ webpack 會提示開發模式和生產模式需加上對應 --mode
 ```
 
 ## 安裝及設定 devServer 
-此為執行 webpack serve 依賴的套件 https://webpack.js.org/configuration/dev-server/
+此為執行 webpack serve 依賴的套件
+
+https://webpack.js.org/configuration/dev-server/
 
 ```
 npm i webpack-dev-server -D
@@ -59,3 +61,30 @@ module.exports = {
     ```html
     <script src="./bundle.js"></script>
     ```
+## 安裝及設定 css-loader 和 style-loader
+讓 webpack 可以讀取 css 檔案並插入到 html 裡
+
+https://webpack.js.org/loaders/css-loader/#root
+
+```
+npm i css-loader style-loader -D
+```
+
+index.js
+```js
+import './css/index.css';
+```
+
+webpack.config.js
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"], // 有順序性的
+      },
+    ],
+  },
+};
+```
