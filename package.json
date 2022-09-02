@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cgh20xx/webpack5/issues"
   },
-  "homepage": "https://github.com/cgh20xx/webpack5#readme"
+  "homepage": "https://github.com/cgh20xx/webpack5#readme",
+  "devDependencies": {
+    "webpack": "^5.74.0"
+  }
 }
