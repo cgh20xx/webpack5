@@ -88,3 +88,40 @@ module.exports = {
   },
 };
 ```
+
+## 安裝及設定 html-webpack-plugin
+此套件可讓 webpack 打包時，依照指定的 html 模版產生 html 檔，並且自動加入 hash 過的 js css 路徑。
+https://webpack.js.org/plugins/html-webpack-plugin/#root
+
+```
+npm i html-webpack-plugin -D
+```
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+module.exports = {
+  ...
+  plugins: [new HtmlWebpackPlugin()],
+};
+```
+
+HtmlWebpackPlugin 文件：https://github.com/jantimon/html-webpack-plugin#options
+可以設定 title、template 等參數
+```js
+module.exports = {
+  ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Hello App',
+      template: './src/template.html'
+    })
+  ]
+}
+```
+
+template.html 動態插入 title
+```html
+<title><%= htmlWebpackPlugin.options.title %></title>
+```
