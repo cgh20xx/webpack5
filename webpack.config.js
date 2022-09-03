@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -18,7 +19,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'], // 有順序性的
+        use: [MiniCssExtractPlugin.loader, 'css-loader'], // 有順序性的
       },
     ],
   },
@@ -26,6 +27,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Hello App',
       template: './src/template.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'index.[contenthash].css',
     }),
   ],
 };

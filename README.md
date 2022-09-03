@@ -125,3 +125,43 @@ template.html 動態插入 title
 ```html
 <title><%= htmlWebpackPlugin.options.title %></title>
 ```
+
+## 安裝及設定 mini-css-extract-plugin
+此套件可將 css 提取出來為獨立的 .css 檔案
+文件：https://webpack.js.org/plugins/mini-css-extract-plugin/#root
+
+安裝 mini-css-extract-plugin
+```
+npm i mini-css-extract-plugin -D
+```
+
+webpack.config.js
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
+  },
+};
+```
+- plugins 新增 new MiniCssExtractPlugin()
+- 將原本的 style-loader 替換為 MiniCssExtractPlugin.loader
+
+設定 Plugin Options
+```js
+new MiniCssExtractPlugin({
+  filename: 'index.[contenthash].css',
+}),
+```
+
+Webpack 的 hash 有三種：
+1. hash：每次建構都會生成新的 hash。和整個專案有關，只要有文件更改就會改變 hash。
+2. contenthash：和單文件內容有關。指定文件的內容發生改變，就會改變 hash。
+3. chunkhash：和 webpack 打包生成的 chunk 相關。每一個 entry 都會有不同的 hash。
