@@ -200,3 +200,12 @@ npm i babel-loader @babel/core @babel/preset-env -D
 }
 ```
 
+
+## 產生 source-map 方便 debug
+在 webpack.config.js 新增以下設定。注意：生產模式不需要這個設定
+```js
+{
+  devtool: 'source-map',
+}
+```
+

@@ -39,4 +39,5 @@ module.exports = {
       filename: 'index.[contenthash].css',
     }),
   ],
+  devtool: 'source-map',
 };
