@@ -165,3 +165,38 @@ Webpack 的 hash 有三種：
 1. hash：每次建構都會生成新的 hash。和整個專案有關，只要有文件更改就會改變 hash。
 2. contenthash：和單文件內容有關。指定文件的內容發生改變，就會改變 hash。
 3. chunkhash：和 webpack 打包生成的 chunk 相關。每一個 entry 都會有不同的 hash。
+
+
+## 安裝及設定 Babel
+babel 可將最新的 JS 語法轉為各瀏覽器都支持的舊語法，讓開發時可以使用最新的 JS 語法，不用擔心瀏覽器支援度問題
+文件：https://babeljs.io/setup#installation
+
+安裝 babel-loader 及 @babel/core 及 @babel/preset-env
+```
+npm i babel-loader @babel/core @babel/preset-env -D
+```
+
+設定 babel-loader 在 webpack.config.js
+```js
+{
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
+}
+```
+
+建立 babel.config.json 然後貼上以下代碼
+```json
+{
+  "presets": ["@babel/preset-env"]
+}
+```
+
