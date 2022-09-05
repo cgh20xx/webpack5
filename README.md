@@ -243,3 +243,44 @@ module.exports = {
 };
 ```
 
+## 設定 resolve.alias
+
+設定 import 或 require 的別名，讓導入模組變的更簡單，常使用 @ 來替代 ./src
+
+文件：https://webpack.docschina.org/configuration/resolve/#resolvealias
+
+webpack.config.js 為 ./src 設定一個別名 @
+```js
+const path = require('path');
+
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+};
+```
+
+index.js 修改先前導入的資源路徑
+```diff
+-import './css/index.css';
+-import ball from './images/ball_0.png';
+-import coin from './images/coin.png';
++import '@/css/index.css';
++import ball from '@/images/ball_0.png';
++import coin from '@/images/coin.png';
+```
+
+index.css 修改先前導入的資源路徑
+```diff
+.ball_1 {
+  width: 100px;
+  height: 100px;
+- background-image: url('../images/ball_1.png');
++ background-image: url('@/images/ball_1.png');
+}
+```
+
+
