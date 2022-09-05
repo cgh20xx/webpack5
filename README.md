@@ -9,17 +9,35 @@ npm i webpack -D
 
 文件：https://webpack.js.org/
 
+可為 output.filename 進階設置 palceholder 
+- [name]：對應 entry name
+- [chunkhash]：對應當前 entry 所產生的 hash
+
+Webpack 的 hash 有三種：
+1. hash(已棄用)：每次建構都會生成新的 hash。和整個專案有關，只要有文件更改就會改變 hash。
+2. chunkhash：和 webpack 打包生成的 chunk 相關。每一個 entry 都會有不同的 hash。
+3. contenthash：和單文件內容有關。指定文件的內容發生改變，就會改變 hash。
+
 ```js
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  // entry: './src/index.js', // 預設 entry name 為 main
+  entry: {
+    app: './src/index.js', // 設置 entry name 為 app
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    // filename: 'bundle.js', // 基本設置
+    filename: '[name].[chunkhash].bundle.js', // 進階設置
+    clean: true, // 在生成文件之前清空 output 目錄。
   },
 };
 ```
+
+output.clean 補充：webpack 5.20.0 之後不再需要 CleanWebpackPlugin
+
+output.clean 文件：https://webpack.docschina.org/configuration/output/#outputclean
 
 ## package.json 新增 script 指令
 webpack 會提示開發模式和生產模式需加上對應 --mode
@@ -161,14 +179,9 @@ module.exports = {
 設定 Plugin Options
 ```js
 new MiniCssExtractPlugin({
-  filename: 'index.[contenthash].css',
+  filename: '[name].[contenthash].css',
 }),
 ```
-
-Webpack 的 hash 有三種：
-1. hash：每次建構都會生成新的 hash。和整個專案有關，只要有文件更改就會改變 hash。
-2. contenthash：和單文件內容有關。指定文件的內容發生改變，就會改變 hash。
-3. chunkhash：和 webpack 打包生成的 chunk 相關。每一個 entry 都會有不同的 hash。
 
 
 ## 安裝及設定 Babel

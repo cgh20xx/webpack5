@@ -3,10 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  // entry: './src/index.js', // 預設 entry name 為 main
+  entry: {
+    app: './src/index.js', // 設置 entry name 為 app
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.[hash].js',
+    // filename: 'bundle.js', // 基本設置
+    filename: '[name].[chunkhash].bundle.js', // 進階設置
+    clean: true, // 在生成文件之前清空 output 目錄。
   },
   devServer: {
     static: {
@@ -40,7 +45,7 @@ module.exports = {
       template: './src/template.html',
     }),
     new MiniCssExtractPlugin({
-      filename: 'index.[contenthash].css',
+      filename: '[name].[contenthash].css',
     }),
   ],
   devtool: 'source-map',
