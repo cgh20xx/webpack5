@@ -28,6 +28,10 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        type: 'asset', // 還有其它三種 type
+      },
     ],
   },
   plugins: [

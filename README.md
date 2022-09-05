@@ -6,7 +6,9 @@ npm i webpack -D
 ```
 
 ## 新增 webpack.config.js
-https://webpack.js.org/
+
+文件：https://webpack.js.org/
+
 ```js
 const path = require('path');
 
@@ -34,7 +36,7 @@ webpack 會提示開發模式和生產模式需加上對應 --mode
 ## 安裝及設定 devServer 
 此為執行 webpack serve 依賴的套件
 
-https://webpack.js.org/configuration/dev-server/
+文件：https://webpack.js.org/configuration/dev-server/
 
 ```
 npm i webpack-dev-server -D
@@ -64,7 +66,7 @@ module.exports = {
 ## 安裝及設定 css-loader 和 style-loader
 讓 webpack 可以讀取 css 檔案並插入到 html 裡
 
-https://webpack.js.org/loaders/css-loader/#root
+文件：https://webpack.js.org/loaders/css-loader/#root
 
 ```
 npm i css-loader style-loader -D
@@ -108,6 +110,7 @@ module.exports = {
 ```
 
 HtmlWebpackPlugin 文件：https://github.com/jantimon/html-webpack-plugin#options
+
 可以設定 title、template 等參數
 ```js
 module.exports = {
@@ -128,6 +131,7 @@ template.html 動態插入 title
 
 ## 安裝及設定 mini-css-extract-plugin
 此套件可將 css 提取出來為獨立的 .css 檔案
+
 文件：https://webpack.js.org/plugins/mini-css-extract-plugin/#root
 
 安裝 mini-css-extract-plugin
@@ -169,6 +173,7 @@ Webpack 的 hash 有三種：
 
 ## 安裝及設定 Babel
 babel 可將最新的 JS 語法轉為各瀏覽器都支持的舊語法，讓開發時可以使用最新的 JS 語法，不用擔心瀏覽器支援度問題
+
 文件：https://babeljs.io/setup#installation
 
 安裝 babel-loader 及 @babel/core 及 @babel/preset-env
@@ -207,5 +212,34 @@ npm i babel-loader @babel/core @babel/preset-env -D
 {
   devtool: 'source-map',
 }
+```
+
+## 設定 asset-modules 讓 js 能載入圖片資源
+取代 webpack4 的 raw-loader url-loader file-loader，在 webpack5 統一用 asset-modules 來處理。
+
+文件：https://webpack.js.org/guides/asset-modules/
+
+首先在 index.js import 一張圖片
+```js
+import ball from './images/ball_0.png';
+// 若圖片小於 8kB 會被轉為 base64 格式
+const imgBall = document.createElement('img');
+imgBall.src = ball;
+document.body.appendChild(imgBall);
+```
+
+在 webpack.config.js 新增一個 rules
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        type: 'asset', // 還有其它三種 type
+      },
+    ],
+  },
+};
 ```
 
