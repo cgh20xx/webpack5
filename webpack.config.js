@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
   // entry: './src/index.js', // 預設 entry name 為 main
@@ -34,9 +35,27 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         type: 'asset', // 還有其它三種 type
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ['gifsicle'],
+              ['mozjpeg', { quality: 90 }], // https://www.npmjs.com/package/imagemin-mozjpeg
+              ['pngquant', { speed: 4 }], // https://www.npmjs.com/package/imagemin-pngquant
+            ],
+          },
+        },
+        // Disable `loader` 禁用 loader 之後，預設 8KB 以上的檔案才會進來被 ImageMinimizerPlugin 處來
+        loader: false,
+      }),
     ],
   },
   plugins: [

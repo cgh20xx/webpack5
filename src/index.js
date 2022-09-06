@@ -1,6 +1,8 @@
 import '@/css/index.css';
 import ball from '@/images/ball_0.png';
 import coin from '@/images/coin.png';
+import firefox from '@/images/firefox.jpg';
+import itemPhone from '@/images/item_phone2.png';
 // 若圖片小於 8kB 會被轉為 base64 格式
 console.log('dev server');
 
