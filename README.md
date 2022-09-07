@@ -1,4 +1,4 @@
-# webpack5 筆記
+# webpack5 學習筆記
 
 ## 安裝 webpack
 ```
