@@ -1,6 +1,6 @@
 # webpack5 學習筆記
 
-## 安裝 webpack
+## 安裝 webpack 5
 ```
 npm i webpack -D
 ```
