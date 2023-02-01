@@ -1,6 +1,6 @@
 # webpack5 快速筆記 2022
 
-## 安裝 webpack 5
+## 安裝 webpack 5 test
 ```
 npm i webpack -D
 ```
